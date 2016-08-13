@@ -28,9 +28,27 @@ I'm a developer and so, am not proficient with Linux, Virtual Machines, Vagrant,
 ### Install
 3. Clone this repo to the directory where you will be running everything (e.g. C:\MEAN2VAGRANT\)
 4. Run hosts.add.bat - this will add a hosts entry for www.mean2.dev pointing to the vagrant machine's IP (192.168.80.30)
-5. Run *_vagrant.Up.bat* or *vagrant up* from command line.
+5. Run **_vagrant.Up.bat** or **vagrant up** from command line.
 
-If everything goes right (you may need to run *_vagrant.Reload.bat* or *vagrant reload*, after initial install), you should be able to hit [www.mean2.dev](http://www.mean2.dev) in the browser and see the Angular2 start page. Hit [www.mean2.dev/api/](http://www.mean2.dev/api/) to access Express.
+If everything goes right (you may need to run **_vagrant.Reload.bat** or **vagrant reload**, after initial install), you should be able to hit [www.mean2.dev](http://www.mean2.dev) in the browser and see the Angular2 start page. Hit [www.mean2.dev/api/](http://www.mean2.dev/api/) to access Express.
 
 ## Want to improve this?
 If you know anything about any of the underlying technologies that would improve this setup, feel free to reach out to me or just create a PR. That would be very much appreciated.
+
+## More details
+
+Access the code in **/app/server/** and **/app/client/**. **/app** is a shared folder, accessible in the VM at **/vagrant/app/**. You can access the VM either by using the VirtualBox interface (username: vagrant, password: vagrant) or just by running **_vagrant.SSH.bat**
+
+**nginx.conf** in the main direcory is the nginx configuration file. It will get updated in the VM everytime you run **vagrant up**. If you make changes while the machine is running and you want them applied, run **nginx.UpdateReload.bat**.
+
+**_urlResources** - contains some links I used during this whole process.
+
+**Vagrantfile** contains all the vagrant configuration. It contains some comments about what it's doing.
+
+There is a number of files that run during the provisioning, as well as one file that runs everytime the server gets run:
+* **setup.10.base.ps** - Updates Ubuntu and gets git
+* **setup.15.nginx.sh** - Installs nginx
+* **setup.20.nvm.sh** - Installs NVM (node version manager), NPM (node package manager), and the latest Node
+* **setup.40.ServerSide.sh** - Express, Mongo, Mongooose install based on [this post](https://www.airpair.com/javascript/complete-expressjs-nodejs-mongodb-crud-skeleton) - check it out, it's a good read.
+* **setup.50.ClientSide.sh** - [Angular 2 Starter kit](https://github.com/AngularClass/angular2-webpack-starter). Had some issues with this, but it seems to work.
+* **setup.runServers.sh** (will always run) - update nginx.conf, run express server (using **[forever](https://github.com/foreverjs/forever)**), run the angular+webpack server (with hot module replacement; not currently using **forever** because of some issues)
