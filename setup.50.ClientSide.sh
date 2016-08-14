@@ -37,3 +37,8 @@ until [ ${NPM} -eq 0 ] || [ ${COUNTER} -gt ${GUARD} ]; do
   let COUNTER+=1
 done
 
+#initial build
+#echo "---npm run build:dev---"
+#npm run build:dev
+#echo 'first run, might fail'
+#exec & npm run server:dev:hmr
