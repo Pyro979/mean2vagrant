@@ -51,4 +51,10 @@ There is a number of files that run during the provisioning, as well as one file
 * **setup.20.nvm.sh** - Installs NVM (node version manager), NPM (node package manager), and the latest Node
 * **setup.40.ServerSide.sh** - Express, Mongo, Mongooose install based on [this post](https://www.airpair.com/javascript/complete-expressjs-nodejs-mongodb-crud-skeleton) - check it out, it's a good read.
 * **setup.50.ClientSide.sh** - [Angular 2 Starter kit](https://github.com/AngularClass/angular2-webpack-starter). Had some issues with this, but it seems to work.
-* **setup.runServers.sh** (will always run) - update nginx.conf, run express server (using **[forever](https://github.com/foreverjs/forever)**), run the angular+webpack server (with hot module replacement; not currently using **forever** because of some issues)
+* **setup.runServers.sh** (will always run) - update nginx.conf. Used to run servers, but that's separated now.
+
+## _vagrant.runServers.bat
+This can run separatly if the servers is already up, but will also run when running _vagrant.DestroyAndUp.bat, _vagrant.Reload.bat or _vagrant.Up.bat. You can stop the window, and rerun it to restart both the backend and the frontend servers.
+
+* Run express server (using **[forever](https://github.com/foreverjs/forever)**)
+* Run the angular+webpack server (with hot module replacement; not currently using **forever** because of some issues)
